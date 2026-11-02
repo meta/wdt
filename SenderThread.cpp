@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 #include <folly/Conv.h>
-#include <folly/Memory.h>
 #include <folly/String.h>
 #include <folly/hash/Checksum.h>
 #include <folly/lang/Bits.h>
