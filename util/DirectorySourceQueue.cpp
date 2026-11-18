@@ -584,9 +584,12 @@ bool DirectorySourceQueue::enqueueFiles(std::vector<WdtFileInfo>& fileInfo) {
         {
           std::unique_lock<std::mutex> lock(mutex_);
           failedSourceStats_.emplace_back(std::move(failedSourceStat));
+          // Count the entry so that the number of transferred files
+          // (entries minus failures) stays correct.
+          numEntries_++;
         }
 
-        return false;
+        continue;
       }
       info.fileSize = fileStat.st_size;
     }
