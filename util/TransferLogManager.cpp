@@ -754,8 +754,10 @@ string LogParser::getFormattedTimestamp(int64_t timestampMicros) {
   // on high_resolution_clock (on MacOS at least it isn't)
   time_t seconds = timestampMicros / kMicroToSec;
   int microseconds = timestampMicros - seconds * kMicroToSec;
-  // need 25 bytes to encode date in format mm/dd/yy HH:MM:SS.MMMMMM
-  char buf[25];
+  // mm/dd/yy HH:MM:SS.MMMMMM needs 25 bytes including the NUL, but compilers
+  // warn that the format below may need 76 (they don't know that an hour
+  // cannot have 2000000000 minutes, etc).
+  char buf[80];
   struct tm tm;
   localtime_r(&seconds, &tm);
   snprintf(buf, sizeof(buf), "%02d/%02d/%02d %02d:%02d:%02d.%06d",
