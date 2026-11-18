@@ -91,8 +91,8 @@ void WdtSocket::readEncryptionSettingsOnce(int timeoutMs) {
     readErrorCode_ = ENCRYPTION_ERROR;
     return;
   }
-  WLOG(INFO) << "Successfully read encryption settings " << port_ << " "
-             << encryptionTypeToStr(encryptionType);
+  WVLOG(1) << "Successfully read encryption settings " << port_ << " "
+           << encryptionTypeToStr(encryptionType);
   encryptionSettingsRead_ = true;
 }
 

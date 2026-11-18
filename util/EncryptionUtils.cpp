@@ -327,8 +327,7 @@ bool AESEncryptor::finish(std::string& tagOut) {
   }
   started_ = false;
   bool status = finishInternal(evpCtx_.get(), type_, tagOut);
-  WLOG_IF(INFO, status) << "Encryption finish tag = "
-                        << folly::humanify(tagOut);
+  WVLOG_IF(1, status) << "Encryption finish tag = " << folly::humanify(tagOut);
   return status;
 }
 
@@ -458,8 +457,8 @@ bool AESDecryptor::finish(const std::string& tag) {
   }
   started_ = false;
   bool status = finishInternal(evpCtx_.get(), type_, tag);
-  WLOG_IF(INFO, status) << "Successful end of decryption with tag = "
-                        << folly::humanify(tag);
+  WVLOG_IF(1, status) << "Successful end of decryption with tag = "
+                      << folly::humanify(tag);
   return status;
 }
 
